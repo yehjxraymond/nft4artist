@@ -1,0 +1,424 @@
+import { dark, syntaxHighlighterPrism } from "@mdx-deck/themes";
+import { Box } from "theme-ui";
+
+export const theme = {
+  ...syntaxHighlighterPrism,
+  ...dark,
+};
+
+export const Highlighted = ({ children }) => (
+  <Box color="tomato" style={{ display: "inline-block" }}>
+    {children}
+  </Box>
+);
+
+export const Link = ({ children, href }) => (
+  <a href={href} style={{ color: "white" }}>
+    {children}
+  </a>
+);
+
+# NFT: Behind The Scene
+
+Right click and upload
+
+---
+
+## \$ whoami
+
+<Steps>
+
+
+- Raymond Yeh
+- CTO @ <Link href="https://bluejay.finance/">Bluejay.Finance</Link>
+- Creator @ <Link href="https://floppydisknft.com/">Floppy Disk NFT</Link>
+- MEV Bot Operator (<Link href="https://t.me/hypednftmint">Current Experiment</Link>)
+
+</Steps>
+
+
+---
+
+## What's up
+
+<Steps>
+
+
+- Smart Contracts Explained
+- What is NFT (ERC721 vs ERC1155)
+- Behind the scene of an NFT
+- Generative art
+- Minting your NFT
+
+</Steps>
+
+
+---
+
+## Ethereum is a BIG computer
+
+<small>Albeit a slow one...</small>
+
+---
+
+## A computer can
+
+- Store data
+- Run different programs
+
+---
+
+## Ethereum can
+
+- Store states
+- Run smart contract that defines state transition (or rules)
+
+---
+
+## A computer running Excel
+
+<img src="/assets/excel.png" style={{ height: "45%" }} />
+
+---
+
+## Ethereum running an ERC721 Smart Contract
+
+<img src="/assets/excel-erc721.png" style={{ height: "45%" }} />
+<small>Wait what about who can edit?</small>
+
+---
+
+## Sample rules
+
+<Steps>
+
+
+- Only when 0.01 ETH is sent, a new entry will be created with owner set to msg.sender (Minting)
+- Maximum of 10,000 entry is allowed (Max no. tokens)
+- `tokenUri` is `baseUri` + `tokenId` (Token metadata)
+- Only current owner of `tokenId` or approved addresses can update the owner field (Transfer)
+- etc
+
+</Steps>
+
+
+---
+
+## What if every program is written differently?
+
+`ownerOf`? `ownedBy`? `owned`?
+
+---
+
+## The rise of standards
+
+<Steps>
+
+
+- <Link href="https://eips.ethereum.org/EIPS/eip-20">ERC20</Link> - Token standards
+- <Link href="https://erc721.org/">ERC721</Link> - Non-fungible token standards
+- <Link href="https://docs.opensea.io/docs/metadata-standards">
+    Opensea Metadata
+  </Link> - NFT Metadata standard
+- <Link href="https://eips.ethereum.org/EIPS/eip-1155">ERC1155</Link> - Multi Token
+  Standard
+
+</Steps>
+
+
+<small>Fun Fact: Crypto Punks were pre-ERC721</small>
+
+---
+
+## ERC721
+
+```
+// Some examples
+function ownerOf(uint256 _tokenId) external view returns (address);
+function balanceOf(address _owner) external view returns (uint256);
+function transferFrom(address _from, address _to, uint256 _tokenId) external payable;
+function approve(address _approved, uint256 _tokenId) external payable;
+function setApprovalForAll(address _operator, bool _approved) external;
+```
+
+---
+
+## ERC721 vs ERC1155?
+
+---
+
+## ERC721
+
+<img src="/assets/excel-erc721.png" style={{ height: "45%" }} />
+
+---
+
+## ERC1155
+
+<img src="/assets/excel-erc1155.png" style={{ height: "45%" }} />
+
+---
+
+## Let's Play!
+
+- <Link href="https://opensea.io/assets/0x60e4d786628fea6478f785a6d7e704777c86a7c6/1">
+    Mutant Ape Contract
+  </Link>
+- <Link href="https://opensea.io/assets/0x892848074ddea461a15f337250da3ce55580ca85/1">
+    Cyber Broker Contract
+  </Link>
+- <Link href="https://opensea.io/assets/0x59468516a8259058bad1ca5f8f4bff190d30e066/1">
+    Invisible Friends Contract
+  </Link>
+- <Link href="https://opensea.io/assets/0xb47e3cd837ddf8e4c57f05d70ab865de6e193bbb/1">
+    Crypto Punks Contract
+  </Link>
+- <Link href="https://opensea.io/assets/0x495f947276749ce646f68ac8c248420045cb7b5e/91015854458775626546266917337677518118210678757598385512114170878752332972042">
+    OpenSea Shared Storefront
+  </Link>
+- <Link href="https://opensea.io/assets/0xBcA5D4f9C1B6D5C8E0BFfc8a5937948112CE3F19/290">
+    Super Cool Peeps
+  </Link>
+- <Link href="https://opensea.io/assets/0x06536bd54dd9b11ff664dc2880595aa4976188c3/45">
+    Floppy Disk Contract
+  </Link>
+
+<small>
+  Read Code | Query | Write from Etherscan | Sending Raw Transaction
+</small>
+
+---
+
+## What's in `tokenURI`
+
+```
+// Mutant Ape Yatch Club
+https://boredapeyachtclub.com/api/mutants/9260
+
+// Invisible Friends
+https://invisiblefriends.io/api/10
+
+// Cyber Broker
+ipfs://QmYjhUCiQrYZCZNRk2wNbfuNgJF6Aan1dmnydPYjyS6DQ1/10
+
+// Super Cool Peeps
+data:application/json;base64eyJuYW1lIjoiUEVFUC...cG5nIn0=
+
+// OpenSea Shared Storefront
+https://api.opensea.io/api/v1/metadata/0x495f947276749Ce646f68AC8c248420045cb7b5e/0xc93925e7af849be65c61fcccadf28c1d8fce0f5c00000000000031000000000a
+```
+
+---
+
+## Metadata - Everything about the NFT
+
+<img src="/assets/metadata-standard.png" style={{ height: "45%" }} />
+
+<Link href="https://docs.opensea.io/docs/metadata-standards">
+  OpenSea Metadata Standard
+</Link>
+
+---
+
+## Ways to host the Metadata
+
+<Steps>
+
+
+- Centralized Server (MAYC/Invisible Friends/OpenSea Shared Storefront)
+- IPFS (Cyber Broker/Floppy Disk)
+- Smart Contract (Super Cool Peeps/Uniswap V3/Timeswap)
+
+</Steps>
+
+
+<small>
+  Eg.{" "}
+  <Link href="https://opensea.io/assets/0xc36442b4a4522e871399cd717abdd847ab11fe88/69821">
+    Uniswap V3
+  </Link>{" "}
+  |{" "}
+  <Link href="https://testnets.opensea.io/assets/0x5216b15f14914023c2092b8486f694f8fe2766f6/325">
+    Timeswap
+  </Link>
+  | <Link href="https://api.opensea.io/api/v1/metadata/0x495f947276749Ce646f68AC8c248420045cb7b5e/0xc93925e7af849be65c61fcccadf28c1d8fce0f5c00000000000031000000000a">OpenSea Shared Storefront</Link>
+</small>
+
+---
+
+## Hosting Metadata
+
+### Centralized Server vs IPFS vs Smart Contract
+
+<small>Remember you may be able change your baseURI anyway...</small>
+
+---
+
+## How???
+
+<Steps>
+
+
+<ul>
+  <li> OpenSea Shared Storefront </li>
+  <li>
+    NFT Launchpads (<Link href="https://www.artlab.xyz/">Artlab</Link>
+    {", "}
+    <Link href="https://wenmint.com/">Wenmint</Link>
+    {", "}
+    <Link href="https://www.launchmynft.io/">Launchmynft</Link>
+    {", "}
+    <Link href="https://www.airnfts.com/">Airnfts</Link>)
+  </li>
+  <li>
+    {" "}
+    Generate and store on IPFS (<Link href="https://www.pinata.cloud/">
+      Pinata
+    </Link>)
+  </li>
+  <li> On-demand generation with hosted services (AWS Lambda)</li>
+  <li>
+    Custom smart contract metadata (
+    <Link href="https://github.com/Uniswap/v3-periphery/blob/main/contracts/libraries/NFTDescriptor.sol">
+      Descriptor
+    </Link>
+    , <Link href="https://github.com/Uniswap/v3-periphery/blob/main/contracts/libraries/NFTSVG.sol">
+      SVG
+    </Link>)
+  </li>
+</ul>
+
+</Steps>
+
+
+---
+
+## Generated NFTs
+
+<img src="/assets/squirrels.gif" style={{ height: "45%" }} />
+
+<small>...or you can hand-create 10k images</small>
+
+---
+
+## NFT generated from layers
+
+<img src="/assets/layers.png" style={{ height: "45%" }} />
+
+<small>Easily 1 mil unique images from &lt; 60 traits</small>
+
+---
+
+## How???
+
+<Steps>
+
+
+<ul>
+  <li>
+    Online NFT Generator (<Link href="https://nft-inator.com/">NFT-Inator</Link>
+    {", "}
+    <Link href="https://www.niftygenerator.xyz/">nifty generator</Link>)
+  </li>
+  <li>
+    Custom Scripts (
+    <Link href="https://github.com/rounakbanik/generative-art-nft">[1]</Link>
+    {", "}
+    <Link href="https://github.com/codeSTACKr/create-10k-nft-collection">
+      [2]
+    </Link>
+    )
+  </li>
+</ul>
+
+</Steps>
+
+
+<small>
+  <Link href="https://nft-inator.com/app">Let's play</Link>
+</small>
+
+---
+
+## Recap
+
+<Steps>
+
+
+- What are smart contracts?
+- What are NFTs?
+- What is the difference between ERC721 &amp; ERC1155?
+- What are metadata?
+- How are metadata & images stored?
+- How are generative NFT made?
+- What platforms are available?
+
+</Steps>
+
+---
+
+## The NFT Creator Stack
+
+<Steps>
+
+
+- Art
+- Marketing
+- Community Management
+- Development
+- Distribution
+- Intellectual Property
+- Governance
+
+</Steps>
+
+
+---
+
+## Walkthrough of Creating OS Marketplace
+
+<small>
+  <Link
+    href="how-to-create-your-own-marketplace-on-opensea-in-three-minutes-or-less-12373ca5818a
+"
+  >
+    Step-by-step-guide
+  </Link>
+</small>
+
+---
+
+# Q&amp;A
+
+---
+
+## Resources
+
+```
+Basic:
+https://www.youtube.com/watch?v=ftMzXpToq9Q
+https://medium.com/opensea/how-to-create-your-own-marketplace-on-opensea-in-three-minutes-or-less-12373ca5818a
+
+Advanced:
+
+https://levelup.gitconnected.com/how-to-mint-100-000-nfts-for-free-62d83888ff6
+https://github.com/alephao/nft-sale-proxy
+https://docs.nftport.xyz/docs/nftport/ZG9jOjI4NzY0NTY1-how-to-create-dynamic-nf-ts
+
+Expert:
+
+https://github.com/Uniswap/v3-periphery/blob/main/contracts/libraries/NFTDescriptor.sol
+https://github.com/Uniswap/v3-periphery/blob/main/contracts/libraries/NFTSVG.sol
+```
+
+---
+
+# END
+
+- <Link href="https://twitter.com/geek_sg">Twitter</Link>
+- <Link href="https://www.linkedin.com/in/raymondyeh/">LinkedIn</Link>
+- <Link href="https://geek.sg/">Blog</Link>
+- <Link href="https://bluejay.finance/">Bluejay Finance</Link>
+- <Link href="https://floppydisknft.com/">Floppy Disk NFT</Link>
+
+---
